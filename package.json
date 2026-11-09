@@ -1,0 +1,9 @@
+{
+  "name": "anime-tts",
+  "private": true,
+  "scripts": {
+    "start": "cmd /c chay.cmd",
+    "start:ui": "C:\\Python312\\python.exe -u Frontend/server.py",
+    "start:viet": "cd ../SpeechTiengViet && .venv/Scripts/python.exe app.py serve"
+  }
+}

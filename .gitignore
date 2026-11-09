@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+rvc_env/
+venv/
+.venv/
+
+# Model weights (too large for GitHub; use download-model.py)
+*.pth
+model/
+rvc_models/
+
+# Generated audio
+Frontend/exports/
+Frontend/tmp/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anime TTS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+
+    <div class="app">
+      <header class="topbar glass">
+        <div class="brand">
+          <span class="logo"></span>
+          <div>
+            <h1>Anime Voice Studio</h1>
+            <p>Glassmorphic TTS · RVC</p>
+          </div>
+        </div>
+        <div class="status-pill">
+          <span class="dot"></span>
+          Local
+        </div>
+      </header>
+
+      <main class="board">
+        <section class="panel glass" id="panel-voice">
+          <div class="panel-head">
+            <span class="kicker">Bảng 1</span>
+            <h2>Chọn giọng & ngôn ngữ</h2>
+          </div>
+
+          <label class="field">
+            <span>Ngôn ngữ</span>
+            <div class="lang-row" id="lang-row">
+              <button type="button" class="chip active" data-lang="ja">日本語 · Nhật</button>
+              <button type="button" class="chip" data-lang="vi">Tiếng Việt</button>
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Tìm giọng</span>
+            <input id="voice-search" type="search" placeholder="Tên nhân vật..." />
+          </label>
+
+          <div class="voice-meta">
+            <span id="voice-count">0 giọng</span>
+            <span id="active-voice">Ameth</span>
+          </div>
+
+          <div class="voice-grid" id="voice-grid"></div>
+        </section>
+
+        <section class="panel glass" id="panel-io">
+          <div class="panel-head">
+            <span class="kicker">Bảng 2</span>
+            <h2>Input & giọng xuất ra</h2>
+          </div>
+
+          <div class="io-split">
+            <div class="io-block">
+              <div class="block-title">Đưa vào</div>
+              <textarea
+                id="input-text"
+                rows="6"
+                placeholder="Nhập câu cần đọc..."
+              >こんにちは。何かお手伝いできることはありますか?</textarea>
+
+              <label class="drop" id="drop">
+                <input id="audio-file" type="file" accept="audio/*" hidden />
+                <strong>Hoặc thả / chọn file audio</strong>
+                <em id="file-name">Text → TTS Việt → giọng anime. Hoặc thả file audio có sẵn</em>
+              </label>
+
+              <label class="slider-field" id="pitch-field" hidden>
+                <span>Pitch <b id="pitch-val">+5</b></span>
+                <input id="pitch" type="range" min="-12" max="12" value="5" />
+              </label>
+
+              <button type="button" class="cta" id="generate">Tạo giọng nói</button>
+            </div>
+
+            <div class="io-block">
+              <div class="block-title">Xuất ra</div>
+              <div class="progress-wrap" id="progress-wrap" hidden>
+                <div class="progress-head">
+                  <span id="progress-label">Đang tạo...</span>
+                  <span id="progress-pct">0%</span>
+                </div>
+                <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
+                  <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <p class="progress-eta" id="progress-eta">Ước tính còn --</p>
+              </div>
+              <div class="player glass-inset">
+                <div class="wave" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span>
+                </div>
+                <p class="out-meta" id="out-meta">Chưa có audio</p>
+                <audio id="player" controls preload="auto"></audio>
+                <button type="button" class="ghost" id="download" disabled>Tải / Export WAV</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel glass" id="panel-live2d">
+          <div class="panel-head">
+            <span class="kicker">Bảng 3</span>
+            <h2>Live2D Avatar</h2>
+          </div>
+
+          <div class="live2d-stage glass-inset" title="Click avatar để đổi biểu cảm / motion">
+            <canvas id="live2d-canvas"></canvas>
+          </div>
+
+          <p class="live2d-status" id="live2d-status">Đang tải model Live2D...</p>
+
+          <div class="live2d-expr-row" id="live2d-expr-row" hidden></div>
+
+          <div class="live2d-actions">
+            <button type="button" class="ghost" id="live2d-idle" disabled>Idle</button>
+            <button type="button" class="ghost" id="live2d-stop" disabled>Dừng</button>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="./live2d.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
